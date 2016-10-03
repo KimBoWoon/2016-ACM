@@ -17,23 +17,19 @@ bool comp(const Point &p1, const Point &p2) {
 	return p1.start < p2.start;
 }
 
-vector<Point> v;
-
 int main() {
 	int n = 0, d = 0, cnt = 0;
+    Point* v;
 
 	scanf("%d", &n);
+    v = (Point*)malloc(n * sizeof(Point));
 
 	for (int i = 0; i < n; ++i) {
-		int start, end;
-		scanf("%d %d", &start, &end);
-		if (start > end)
-			v.push_back({ end, start, (int)abs(start - end) });
-		else
-			v.push_back({ start, end, (int)abs(start - end) });
+        scanf("%d %d", &v[i].start, &v[i].end);
+        v[i].weight = abs(v[i].start - v[i].end);
 	}
 
-	sort(v.begin(), v.end(), comp);
+	sort(v, v + n, comp);
 
 	scanf("%d", &d);
 
