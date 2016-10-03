@@ -26,6 +26,8 @@ int main() {
 
 	for (int i = 0; i < n; ++i) {
         scanf("%d %d", &v[i].start, &v[i].end);
+        if (v[i].start > v[i].end)
+            swap(v[i].start, v[i].end);
         v[i].weight = abs(v[i].start - v[i].end);
 	}
 
