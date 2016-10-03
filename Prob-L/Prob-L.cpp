@@ -1,33 +1,40 @@
 #include <cstdlib>
 #include <cstdio>
-#include <vector>
+#include <queue>
 using namespace std;
 
 #pragma warning(disable:4996)
 
 int main() {
 	int n, w, l;
-	vector<int> v(1001);
+	queue<int> q;
 
 	scanf("%d %d %d", &n, &w, &l);
 
-	for (int i = 0; i < n; i++) {
-		scanf("%d", &v[i]);
-	}
+	int ans = 0, cnt = 0, sum = 0;
+	for (int i = 0; i < n; ++i) {
+		int weight = 0;
 
-	int ans = 0, weight = 0, cnt = 0;
-	for (int i = 0; i < n; i += cnt) {
-		cnt = 0;
-		for (int j = i; j < n; ++j) {
-			weight += v[j];
-			cnt++;
-			if (weight + v[j + 1] > l)
+		scanf("%d", &weight);
+		for ( ; ; ) {
+			ans++;
+			if (cnt == w) {
+				cnt--;
+				sum -= q.front();
+				q.pop();
+			}
+			if (sum + weight > l) {
+				cnt++;
+				q.push(0);
+			}
+			else {
+				cnt++;
+				q.push(weight);
+				sum += weight;
 				break;
+			}
 		}
-
-		ans += w;
-		weight = 0;
 	}
 
-	printf("%d\n", ans);
+	printf("%d\n", ans + w);
 }
