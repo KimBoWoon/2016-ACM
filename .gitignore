@@ -30,3 +30,6 @@
 
 # Opensdf
 *.opensdf
+
+# IDEA
+.idea/*
