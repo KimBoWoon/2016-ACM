@@ -3,18 +3,20 @@
 #include <algorithm>
 #include <cmath>
 #include <vector>
+#include <queue>
 using namespace std;
 
 #pragma warning(disable:4996)
 
 typedef struct point {
-	int start, end, weight;
+	int start, end;
 } Point;
 
 bool comp(const Point &p1, const Point &p2) {
-	if (p1.start == p2.start)
-		return p1.end < p2.end;
-	return p1.start < p2.start;
+	if (p1.end == p2.end) {
+		return p1.start < p2.start;
+	}
+	return p1.end < p2.end;
 }
 
 int main() {
@@ -28,23 +30,18 @@ int main() {
         scanf("%d %d", &v[i].start, &v[i].end);
         if (v[i].start > v[i].end)
             swap(v[i].start, v[i].end);
-        v[i].weight = abs(v[i].start - v[i].end);
 	}
 
 	sort(v, v + n, comp);
 
+	for (int i = 0; i < n; ++i) {
+		printf("%d %d\n", v[i].start, v[i].end);
+	}
+
 	scanf("%d", &d);
 
 	for (int i = 0; i < n; ++i) {
-		int start = v[i].start, end = (int)abs(start + d), temp = 0;
-		for (int j = 0; j < n; ++j) {
-			if ((d >= v[j].weight) && (start <= v[j].start) && (v[j].end <= end))
-				temp++;
-			else if (v[j].start > end)
-				break;
-		}
 
-		cnt = max(cnt, temp);
 	}
 
 	printf("%d\n", cnt);
