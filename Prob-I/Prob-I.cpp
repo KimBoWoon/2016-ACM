@@ -6,22 +6,21 @@ using namespace std;
 
 #pragma warning(disable:4996)
 
+int arr[1001];
+
 int main() {
 	int n;
-	int* arr;
 
 	scanf("%d", &n);
 
-	arr = (int*)malloc(n * sizeof(int));
-
-	for (int i = 0; i < n; i++)
+	for (int i = 1; i <= n; i++)
 		scanf("%d", &arr[i]);
 
-	sort(arr, arr + n, greater<int>());
+	sort(arr + 1, arr + n + 1, greater<int>());
 
 	for (int i = n; i; i--) {
 		if (arr[i] >= i) {
-			printf("%d\n", i + 1);
+			printf("%d\n", i);
 			return 0;
 		}
 	}

@@ -21,6 +21,7 @@ bool comp(const Point &p1, const Point &p2) {
 
 int main() {
 	int n = 0, d = 0, cnt = 0;
+	priority_queue<int> q;
     Point* v;
 
 	scanf("%d", &n);
@@ -41,7 +42,10 @@ int main() {
 	scanf("%d", &d);
 
 	for (int i = 0; i < n; ++i) {
-
+		q.push(-v[i].start);
+		while (!q.empty() && -q.top() < v[i].end - d)
+			q.pop();
+		cnt = max(cnt, (int) q.size());
 	}
 
 	printf("%d\n", cnt);
